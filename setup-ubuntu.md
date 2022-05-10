@@ -1,21 +1,18 @@
 when setting up a new ubuntu machine:
 
-Firstly
+Firstly update the server and default packages to their most recent version:
 
-`apt update && apt update -y && reboot`
+`apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y && apt-get autoremove -y && apt-get autoclean && apt-get clean && reboot`
 
-when it returns
+when the server rebooted:
 
 ```
 apt install -y screen emacs-nox git python3 python3-pip python3-wheel nodejs postgresql-12 libpq-dev gcc g++ libssl-dev pkg-config openssl software-properties-common libgmp-dev libsecp256k1-dev python3-dev python-is-python3
-useradd -s /bin/bash tezos
-mkdir /home/tezos
-cp -a /etc/skel/.[a-zA-Z]* /home/tezos
-chown -R tezos:tezos /home/tezos
+useradd -m tezos
 ```
-execute `visudo` and add the following line somewhere:
+give the tezos user passwordless root permissions:
 ```
-tezos ALL=NOPASSWD: ALL
+echo 'tezos ALL=NOPASSWD: ALL' > /etc/sudoers.d/tezos
 ```
 and then perform the following:
 ```
